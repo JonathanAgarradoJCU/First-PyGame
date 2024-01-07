@@ -6,11 +6,10 @@ WIDTH, HEIGHT = 1200, 700
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Untitled Python Game")
 
-BACKGROUND = pygame.image.load('Windows-XP-BG.png')
+BACKGROUND = pygame.transform.scale(pygame.image.load('Windows-XP-BG.png'), (WIDTH, HEIGHT))
 
 def draw():
-    scaled_background = pygame.transform.scale(BACKGROUND, (WIDTH, HEIGHT))
-    WIN.blit(scaled_background, (0, 0))
+    WIN.blit(BACKGROUND, (0, 0))
     pygame.display.update()
 
 
