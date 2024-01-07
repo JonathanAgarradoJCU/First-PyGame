@@ -2,7 +2,7 @@ import pygame
 import time
 import random
 
-WIDTH, HEIGHT = 1000, 800
+WIDTH, HEIGHT = 1200, 700
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Untitled Python Game")
 
