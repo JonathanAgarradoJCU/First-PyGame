@@ -23,29 +23,33 @@ def main():
 
     player = pygame.Rect(200, HEIGHT - PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_HEIGHT)
     clock = pygame.time.Clock()
+    start_time = time.time()
+    elapsed_time = 0
 
     while run:
         clock.tick(60)
+        elapsed_time = time.time() - start_time
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
                 break
 
         keys_pressed = pygame.key.get_pressed()
-        if keys_pressed[pygame.K_a]:
+        if keys_pressed[pygame.K_a] and player.x - PLAYER_VELOCITY >= 0:
             player.x -= PLAYER_VELOCITY
         
-        if keys_pressed[pygame.K_d]:
+        if keys_pressed[pygame.K_d] and player.x + PLAYER_VELOCITY + PLAYER_WIDTH <= WIDTH:
             player.x += PLAYER_VELOCITY
 
-        if keys_pressed[pygame.K_w]:
+        if keys_pressed[pygame.K_w] and player.y - PLAYER_VELOCITY >= 0:
             player.y -= PLAYER_VELOCITY
 
-        if keys_pressed[pygame.K_s]:
+        if keys_pressed[pygame.K_s] and player.y + PLAYER_VELOCITY + PLAYER_HEIGHT <= HEIGHT:
             player.y += PLAYER_VELOCITY
 
                 
-        draw(player)
+        draw(player, elapsed_time)
         
     pygame.quit()
 
