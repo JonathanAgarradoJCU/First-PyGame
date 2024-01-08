@@ -21,7 +21,7 @@ def initialize_fonts():
 def draw(player, elapsed_time):
     WIN.blit(BACKGROUND, (0, 0))
 
-    time_text = FONT.render(f"{round(elapsed_time)}s", 1, (255, 255, 255))
+    time_text = FONT.render(f"{round(elapsed_time)}s", 1, (0, 0, 0))
     WIN.blit(time_text, (10, 10))
 
     pygame.draw.rect(WIN, (255, 0, 0), player)
