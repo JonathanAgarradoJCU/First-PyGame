@@ -57,11 +57,12 @@ def main():
         star_count += clock.tick(60)
         elapsed_time = time.time() - start_time
 
-        if star_count > star_add_increment:
-            for _ in range(3):
-                star_x = random.randint(0, WIDTH - STAR_WIDTH)  # Provide the lower bound as 0 and the upper bound as WIDTH - STAR_WIDTH
-                star = pygame.Rect(star_x, -STAR_HEIGHT, STAR_WIDTH, STAR_HEIGHT)
-                stars.append(star)
+        if star_count > star_add_increment and len(stars) < 10:  # Limit the number of stars to 10
+            if star_count % 100 == 0:  # Add a delay of 100 ticks between each star spawn
+                for _ in range(3):
+                    star_x = random.randint(0, WIDTH - STAR_WIDTH)  # Provide the lower bound as 0 and the upper bound as WIDTH - STAR_WIDTH
+                    star = pygame.Rect(star_x, -STAR_HEIGHT, STAR_WIDTH, STAR_HEIGHT)
+                    stars.append(star)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
