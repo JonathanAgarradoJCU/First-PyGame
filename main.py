@@ -7,7 +7,7 @@ WIDTH, HEIGHT = 1200, 700
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Untitled Python Game")
 
-BACKGROUND = pygame.transform.scale(pygame.image.load('Windows-XP-BG.png'), (WIDTH, HEIGHT))
+BACKGROUND = pygame.transform.scale(pygame.image.load('windows-xp-bg.png'), (WIDTH, HEIGHT))
 PLAYER_WIDTH = 40
 PLAYER_HEIGHT = 60
 PLAYER_VELOCITY = 8
