@@ -11,20 +11,29 @@ BACKGROUND = pygame.transform.scale(pygame.image.load('Windows-XP-BG.png'), (WID
 PLAYER_WIDTH = 40
 PLAYER_HEIGHT = 60
 PLAYER_VELOCITY = 8
+STAR_WIDTH = 10
+STAR_HEIGHT = 20
+STAR_VELOCITY = 3
 FONT = None
+
 
 def initialize_fonts():
     global FONT
     pygame.font.init()
     FONT = pygame.font.SysFont('comicsans', 30)
 
-def draw(player, elapsed_time):
+
+def draw(player, elapsed_time, stars):
     WIN.blit(BACKGROUND, (0, 0))
 
     time_text = FONT.render(f"{round(elapsed_time)}s", 1, (0, 0, 0))
     WIN.blit(time_text, (10, 10))
 
     pygame.draw.rect(WIN, (255, 0, 0), player)
+
+    for star in stars:
+        pygame.draw.rect(WIN, (0, 0, 0), star)
+
     pygame.display.update()
 
 initialize_fonts()
@@ -38,9 +47,21 @@ def main():
     start_time = time.time()
     elapsed_time = 0
 
+    star_add_increment = 2000
+    star_count = 0
+
+    stars = []
+    hit = False
+
     while run:
-        clock.tick(60)
+        star_count += clock.tick(60)
         elapsed_time = time.time() - start_time
+
+        if star_count > star_add_increment:
+            for _ in range(3):
+                star_x = random.randint(0, WIDTH - STAR_WIDTH)  # Provide the lower bound as 0 and the upper bound as WIDTH - STAR_WIDTH
+                star = pygame.Rect(star_x, -STAR_HEIGHT, STAR_WIDTH, STAR_HEIGHT)
+                stars.append(star)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -60,8 +81,16 @@ def main():
         if keys_pressed[pygame.K_s] and player.y + PLAYER_VELOCITY + PLAYER_HEIGHT <= HEIGHT:
             player.y += PLAYER_VELOCITY
 
-                
-        draw(player, elapsed_time)
+        for star in stars[:]:
+            star.y += STAR_VELOCITY
+            if star.y > HEIGHT:
+                stars.remove(star)
+            elif star.y + star.height >= player.y and star.colliderect(player):
+                stars.remove(star)
+                hit = True
+                break
+
+        draw(player, elapsed_time, stars)
         
     pygame.quit()
 
