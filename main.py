@@ -1,22 +1,34 @@
 import pygame
 import time
 import random
+import pygame.font
 
 WIDTH, HEIGHT = 1200, 700
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Untitled Python Game")
 
 BACKGROUND = pygame.transform.scale(pygame.image.load('Windows-XP-BG.png'), (WIDTH, HEIGHT))
+PLAYER_WIDTH = 40
+PLAYER_HEIGHT = 60
+PLAYER_VELOCITY = 8
+FONT = None
+
+def initialize_fonts():
+    global FONT
+    pygame.font.init()
+    FONT = pygame.font.SysFont('comicsans', 30)
 
 def draw(player, elapsed_time):
     WIN.blit(BACKGROUND, (0, 0))
+
+    time_text = FONT.render(f"{round(elapsed_time)}s", 1, (255, 255, 255))
+    WIN.blit(time_text, (10, 10))
+
     pygame.draw.rect(WIN, (255, 0, 0), player)
     pygame.display.update()
 
-PLAYER_WIDTH = 40
-PLAYER_HEIGHT = 60
+initialize_fonts()
 
-PLAYER_VELOCITY = 8
 
 def main():
     run = True
@@ -52,6 +64,7 @@ def main():
         draw(player, elapsed_time)
         
     pygame.quit()
+
 
 if __name__ == "__main__":
     main()
