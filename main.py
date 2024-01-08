@@ -8,7 +8,7 @@ pygame.display.set_caption("Untitled Python Game")
 
 BACKGROUND = pygame.transform.scale(pygame.image.load('Windows-XP-BG.png'), (WIDTH, HEIGHT))
 
-def draw(player):
+def draw(player, elapsed_time):
     WIN.blit(BACKGROUND, (0, 0))
     pygame.draw.rect(WIN, (255, 0, 0), player)
     pygame.display.update()
