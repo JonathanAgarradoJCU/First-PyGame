@@ -16,6 +16,8 @@ def draw(player):
 PLAYER_WIDTH = 40
 PLAYER_HEIGHT = 60
 
+PLAYER_VELOCITY = 1
+
 def main():
     run = True
 
@@ -26,6 +28,20 @@ def main():
             if event.type == pygame.QUIT:
                 run = False
                 break
+
+        keys_pressed = pygame.key.get_pressed()
+        if keys_pressed[pygame.K_a]:
+            player.x -= PLAYER_VELOCITY
+        
+        if keys_pressed[pygame.K_d]:
+            player.x += PLAYER_VELOCITY
+
+        if keys_pressed[pygame.K_w]:
+            player.y -= PLAYER_VELOCITY
+
+        if keys_pressed[pygame.K_s]:
+            player.y += PLAYER_VELOCITY
+
                 
         draw(player)
         
